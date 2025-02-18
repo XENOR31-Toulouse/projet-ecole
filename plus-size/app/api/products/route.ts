@@ -30,3 +30,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to add product" }, { status: 500 });
   }
 }
+
+// Add GET request to fetch all products
+export async function GET() {
+  try {
+    const products = await prisma.product.findMany();
+
+    return NextResponse.json(products, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+  }
+}
